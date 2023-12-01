@@ -15,16 +15,6 @@ class ChildListScreen extends StatefulWidget {
 
 class _ChildListScreenState extends State<ChildListScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  void addChildToList() {
-    showDialog(
-        context: context, builder: (context) => const CustomDialogWidget());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,5 +64,10 @@ class _ChildListScreenState extends State<ChildListScreen> {
         ),
       ),
     );
+  }
+
+  void addChildToList() {
+    showDialog(
+        context: context, builder: (context) => const CustomDialogWidget());
   }
 }

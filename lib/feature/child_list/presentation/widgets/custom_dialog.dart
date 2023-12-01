@@ -113,28 +113,7 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                         width: 150,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              if (widget.title != null) {
-                                context.read<ChildListBloc>().add(
-                                    ChildListUpdateEvent(
-                                        index: widget.index!,
-                                        name: childName.text.trim(),
-                                        country: countryName.text.trim(),
-                                        status: _selectedStatus));
-                                Navigator.pop(context);
-                              } else if (childName.text.isEmpty ||
-                                  countryName.text.isEmpty) {
-                              } else {
-                                context.read<ChildListBloc>().add(
-                                    ChildListEvent(
-                                        name: childName.text.trim(),
-                                        country: countryName.text.trim(),
-                                        status: _selectedStatus));
-                                Navigator.pop(context);
-                              }
-                            }
-                          },
+                          onPressed: onSubmitHandler,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.green,
                           ),
@@ -153,5 +132,25 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
         ),
       ),
     );
+  }
+
+  void onSubmitHandler() {
+    if (formKey.currentState!.validate()) {
+      if (widget.title != null) {
+        context.read<ChildListBloc>().add(ChildListUpdateEvent(
+            index: widget.index!,
+            name: childName.text.trim(),
+            country: countryName.text.trim(),
+            status: _selectedStatus));
+        Navigator.pop(context);
+      } else if (childName.text.isEmpty || countryName.text.isEmpty) {
+      } else {
+        context.read<ChildListBloc>().add(ChildListEvent(
+            name: childName.text.trim(),
+            country: countryName.text.trim(),
+            status: _selectedStatus));
+        Navigator.pop(context);
+      }
+    }
   }
 }
