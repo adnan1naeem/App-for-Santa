@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:santa/core/helper/app_colors.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/bloc.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/state.dart';
-import 'package:santa/feature/child_list/presentation/widgets/custom_dialog.dart';
-import 'package:santa/feature/child_list/presentation/widgets/list_tile.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/bloc.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/state.dart';
+import 'package:santa/feature/christmas_list/presentation/widgets/custom_dialog.dart';
+import 'package:santa/feature/christmas_list/presentation/widgets/list_tile.dart';
 
-class ChildListScreen extends StatefulWidget {
-  const ChildListScreen({super.key});
+class ChristmasListScreen extends StatelessWidget {
+  const ChristmasListScreen({super.key});
 
-  @override
-  State<ChildListScreen> createState() => _ChildListScreenState();
-}
-
-class _ChildListScreenState extends State<ChildListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +19,9 @@ class _ChildListScreenState extends State<ChildListScreen> {
       ),
       backgroundColor: AppColors.white,
       body:
-          BlocBuilder<ChildListBloc, ChildListState>(builder: (context, state) {
-        if (state is ChildListSuccessState) {
-          if (state.childList.isEmpty) {
+          BlocBuilder<ChristmasListBloc, ChristmasListState>(builder: (context, state) {
+        if (state is ChristmasListSuccessState) {
+          if (state.christmasList.isEmpty) {
             return const Center(
               child: Text(
                 'Child List is Empty',
@@ -35,9 +30,9 @@ class _ChildListScreenState extends State<ChildListScreen> {
             );
           } else {
             return ListView.builder(
-                itemCount: state.childList.length,
+                itemCount: state.christmasList.length,
                 itemBuilder: (context, index) {
-                  final entity = state.childList[index];
+                  final entity = state.christmasList[index];
                   return ListTileWidget(
                     index: index,
                     title: entity.name,
@@ -56,7 +51,7 @@ class _ChildListScreenState extends State<ChildListScreen> {
         }
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: addChildToList,
+        onPressed: ()=> addChildToList(context: context),
         backgroundColor: AppColors.lightBackgroundShade2,
         child: const Icon(
           Icons.add_outlined,
@@ -66,7 +61,7 @@ class _ChildListScreenState extends State<ChildListScreen> {
     );
   }
 
-  void addChildToList() {
+  void addChildToList({required BuildContext context}) {
     showDialog(
         context: context, builder: (context) => const CustomDialogWidget());
   }

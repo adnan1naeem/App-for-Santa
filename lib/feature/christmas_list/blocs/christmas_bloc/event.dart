@@ -1,33 +1,33 @@
 import 'package:equatable/equatable.dart';
-import 'package:santa/data/models/child_list/list_data.dart';
+import 'package:santa/data/models/christmas_list/list_data.dart';
 
 abstract class ListingEvent extends Equatable {}
 
-class ChildListSuccessEvent extends ListingEvent {
-  final List<ChildListDataModel> childData;
-  ChildListSuccessEvent({required this.childData});
+class ChristmasListSuccessEvent extends ListingEvent {
+  final List<ChristmasListDataModel> childData;
+  ChristmasListSuccessEvent({required this.childData});
   @override
   List<dynamic> get props => [childData];
 }
 
-class ChildListEvent extends ListingEvent {
+class AddChristmasList extends ListingEvent {
   final String name;
   final String country;
   final String status;
 
-  ChildListEvent(
+  AddChristmasList(
       {required this.name, required this.country, required this.status});
   @override
   List<dynamic> get props => [name, country, status];
 }
 
-class ChildListUpdateEvent extends ListingEvent {
+class UpdatedChristmasList extends ListingEvent {
   final String name;
   final String country;
   final String status;
   final int? index;
 
-  ChildListUpdateEvent(
+  UpdatedChristmasList(
       {this.index,
       required this.name,
       required this.country,
@@ -36,10 +36,10 @@ class ChildListUpdateEvent extends ListingEvent {
   List<dynamic> get props => [name, country, status, index];
 }
 
-class DeleteChildListEvent extends ListingEvent {
+class DeletedChristmasList extends ListingEvent {
   final int? index;
 
-  DeleteChildListEvent({
+  DeletedChristmasList({
     this.index,
   });
   @override

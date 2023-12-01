@@ -4,8 +4,8 @@ import 'package:santa/core/component/titled_formfield.dart';
 import 'package:santa/core/helper/app_colors.dart';
 import 'package:santa/core/helper/space.dart';
 import 'package:santa/core/theme/app_styles.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/bloc.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/event.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/bloc.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/event.dart';
 
 class CustomDialogWidget extends StatefulWidget {
   const CustomDialogWidget(
@@ -74,8 +74,7 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
                     verticalSpace(5),
                     Text(
                       "Select Status",
-                      style:
-                          AppStyles.text16.copyWith(color: AppColors.darkGrey),
+                      style: AppStyles.text16.copyWith(color: AppColors.black),
                     ),
                     Row(
                       children: [
@@ -137,20 +136,29 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
   void onSubmitHandler() {
     if (formKey.currentState!.validate()) {
       if (widget.title != null) {
-        context.read<ChildListBloc>().add(ChildListUpdateEvent(
-            index: widget.index!,
-            name: childName.text.trim(),
-            country: countryName.text.trim(),
-            status: _selectedStatus));
-        Navigator.pop(context);
+        updateChristmmas();
       } else if (childName.text.isEmpty || countryName.text.isEmpty) {
+        // do something
       } else {
-        context.read<ChildListBloc>().add(ChildListEvent(
-            name: childName.text.trim(),
-            country: countryName.text.trim(),
-            status: _selectedStatus));
-        Navigator.pop(context);
+        addChristmmasdata();
       }
     }
+  }
+
+  void updateChristmmas() {
+    context.read<ChristmasListBloc>().add(UpdatedChristmasList(
+        index: widget.index!,
+        name: childName.text.trim(),
+        country: countryName.text.trim(),
+        status: _selectedStatus));
+    Navigator.pop(context);
+  }
+
+  void addChristmmasdata() {
+    context.read<ChristmasListBloc>().add(AddChristmasList(
+        name: childName.text.trim(),
+        country: countryName.text.trim(),
+        status: _selectedStatus));
+    Navigator.pop(context);
   }
 }

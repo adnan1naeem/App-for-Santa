@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:santa/core/helper/app_colors.dart';
 import 'package:santa/core/helper/space.dart';
 import 'package:santa/core/theme/app_styles.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/bloc.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/event.dart';
-import 'package:santa/feature/child_list/blocs/child_bloc/state.dart';
-import 'package:santa/feature/child_list/presentation/widgets/custom_dialog.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/bloc.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/event.dart';
+import 'package:santa/feature/christmas_list/blocs/christmas_bloc/state.dart';
+import 'package:santa/feature/christmas_list/presentation/widgets/custom_dialog.dart';
 
 class ListTileWidget extends StatefulWidget {
   const ListTileWidget(
@@ -37,7 +37,7 @@ class _ListTileWidgetState extends State<ListTileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChildListBloc, ChildListState>(
+    return BlocBuilder<ChristmasListBloc, ChristmasListState>(
         builder: (context, state) {
       return GestureDetector(
         child: Padding(
@@ -58,8 +58,8 @@ class _ListTileWidgetState extends State<ListTileWidget> {
                 ),
                 onDismissed: (direction) {
                   context
-                      .read<ChildListBloc>()
-                      .add(DeleteChildListEvent(index: widget.index));
+                      .read<ChristmasListBloc>()
+                      .add(DeletedChristmasList(index: widget.index));
                 },
                 child: Container(
                   padding:

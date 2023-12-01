@@ -27,7 +27,7 @@ class TitledFormField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppStyles.text16.copyWith(color: AppColors.darkGrey),
+          style: AppStyles.text16.copyWith(color: AppColors.black),
         ),
         verticalSpace(5),
         AppFormField(

@@ -3,8 +3,8 @@
 import 'package:santa/data/models/base.dart';
 import 'package:santa/data/models/json_doc.dart';
 
-class ChildListDataModel extends BaseModel {
-  const ChildListDataModel({required JsonDoc data}) : super(jsonDoc: data);
+class ChristmasListDataModel extends BaseModel {
+  const ChristmasListDataModel({required JsonDoc data}) : super(jsonDoc: data);
 
   String get name => data['name'] ?? '';
 
